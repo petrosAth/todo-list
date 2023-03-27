@@ -1,4 +1,6 @@
-class TaskCore {
+import TaskList from './taskList';
+
+class Task {
   #status = false;
   #title;
   #description;
@@ -24,26 +26,20 @@ class TaskCore {
   }
 }
 
-class Task extends TaskCore {
+class TaskWithProps extends Task {
   #dueDate;
   #priority;
-  #subTasks = [];
   constructor(title, props) {
     super(title, props.description);
     this.#dueDate = props.dueDate || '';
     this.#priority = props.priority || 0;
+    this.subTasks = new TaskList();
   }
   set setDueDate(dueDate) {
     this.#dueDate = dueDate;
   }
   set setPriority(priority = 0) {
     this.#priority = priority;
-  }
-  addSubTask(subtask) {
-    this.#subTasks.push(subtask);
-  }
-  get getSubTasks() {
-    return this.#subTasks;
   }
   get info() {
     return {
@@ -52,9 +48,8 @@ class Task extends TaskCore {
       description: super.info.description,
       dueDate: this.#dueDate,
       priority: this.#priority,
-      subTasks: this.#subTasks,
     };
   }
 }
 
-export { TaskCore, Task };
+export { Task, TaskWithProps };
