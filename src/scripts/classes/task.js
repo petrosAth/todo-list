@@ -28,10 +28,11 @@ class Task {
 }
 
 class TaskExt extends Task {
-  constructor(args, extra = { dueDate: '', description: '' }) {
-    super(...[].concat(args));
-    this.dueDate = extra.dueDate || '';
-    this.description = extra.description || '';
+  #type = 'TaskExt';
+  constructor(id, title, priority, dueDate, description) {
+    super(id, title, priority);
+    this.dueDate = dueDate;
+    this.description = description;
   }
   get info() {
     return {
