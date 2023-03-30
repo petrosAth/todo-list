@@ -1,11 +1,22 @@
-class TaskList {
-  #tasks = [];
-  addTask(task) {
-    this.#tasks.push(task);
+class List {
+  #name;
+  #list = [];
+  constructor(name = 'New list') {
+    this.#name = name;
   }
-  get tasks() {
-    return this.#tasks;
+  set setName(name) {
+    this.#name = name;
+  }
+  set addTask(task) {
+    this.#list.push(task);
+  }
+  get info() {
+    return {
+      name: this.#name,
+      length: this.#list.length,
+      tasks: this.#list,
+    };
   }
 }
 
-export default TaskList;
+export { List };
