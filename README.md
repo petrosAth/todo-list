@@ -8,7 +8,7 @@ ToDo is an app for creating and managing To-Do lists.
 
 - `HTML`
 - `SCSS`: Used for styling utilizing the 7-1 file structure
-- `JavaScript`
+- `JavaScript`: Private Class fields, UUID, localStorage
 
 ## Tools
 
