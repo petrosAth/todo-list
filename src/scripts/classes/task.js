@@ -4,7 +4,6 @@ class Task {
   constructor(id, title = 'New task', priority = 0) {
     const validUuid = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi;
     this.#id = validUuid.test(id) ? id : crypto.randomUUID();
-    // localStorage.setItem(id, 'core');
     this.title = title;
     this.priority = priority;
   }
@@ -28,7 +27,6 @@ class Task {
 }
 
 class TaskExt extends Task {
-  #type = 'TaskExt';
   constructor(id, title, priority, dueDate, description) {
     super(id, title, priority);
     this.dueDate = dueDate;
