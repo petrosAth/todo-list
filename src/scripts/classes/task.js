@@ -1,3 +1,5 @@
+import { dateFormat } from '../modules/utilities';
+
 class Task {
   #id;
   #status = false;
@@ -29,7 +31,7 @@ class Task {
 class TaskExt extends Task {
   constructor(id, title, priority, dueDate, description) {
     super(id, title, priority);
-    this.dueDate = dueDate;
+    this.dueDate = dateFormat().toString(dueDate);
     this.description = description;
   }
   get info() {
