@@ -14,8 +14,18 @@ class List {
       tasks: this.list,
     };
   }
+  #sortByPriority(taskA, taskB) {
+    if (taskA.priority < taskB.priority) {
+      return 1;
+    }
+    if (taskA.priority > taskB.priority) {
+      return -1;
+    }
+    return 0;
+  }
   addTask(tasks) {
     this.list.push(...[].concat(tasks));
+    this.list.sort(this.#sortByPriority);
   }
   removeTask(taskId) {
     const taskIndex = this.list.findIndex((task) => task.info.id === taskId);
@@ -23,4 +33,4 @@ class List {
   }
 }
 
-export { List };
+export default List;
