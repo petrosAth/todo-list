@@ -24,3 +24,6 @@ ToDo is an app for creating and managing To-Do lists.
     vendor prefixes in CSS to ensure browser compatibility
 - [`ESLint`](https://eslint.org): Linter that statically analyzes the JavaScript
   code to quickly find problems
+- [`date-fns`](https://github.com/date-fns/date-fns): A utility library that
+  provides the most comprehensive, yet simple and consistent tool set for
+  manipulating JavaScript dates in a browser & Node.js
