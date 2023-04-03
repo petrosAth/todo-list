@@ -17,6 +17,10 @@ class List {
   addTask(tasks) {
     this.list.push(...[].concat(tasks));
   }
+  removeTask(taskId) {
+    const taskIndex = this.list.findIndex((task) => task.info.id === taskId);
+    this.list.splice(taskIndex, 1);
+  }
 }
 
 export { List };
