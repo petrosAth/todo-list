@@ -31,7 +31,7 @@ class Task {
 class TaskExt extends Task {
   constructor(id, title, priority, dueDate, description) {
     super(id, title, priority);
-    this.dueDate = dateFormat().toString(dueDate);
+    this.dueDate = dateFormat().toString(dueDate) || 9;
     this.description = description;
   }
   get info() {

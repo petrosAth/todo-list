@@ -14,17 +14,19 @@ class List {
       tasks: this.list,
     };
   }
+  #sortByDueDate(taskA, taskB) {
+    if (taskA.dueDate < taskB.dueDate) return 1;
+    if (taskA.dueDate < taskB.dueDate) return -1;
+    return 0;
+  }
   #sortByPriority(taskA, taskB) {
-    if (taskA.priority < taskB.priority) {
-      return 1;
-    }
-    if (taskA.priority > taskB.priority) {
-      return -1;
-    }
+    if (taskA.priority < taskB.priority) return 1;
+    if (taskA.priority > taskB.priority) return -1;
     return 0;
   }
   addTask(tasks) {
     this.list.push(...[].concat(tasks));
+    this.list.sort(this.#sortByDueDate);
     this.list.sort(this.#sortByPriority);
   }
   removeTask(taskId) {
