@@ -1,7 +1,7 @@
 class List {
   #id;
-  constructor(name = 'New list', id) {
-    this.name = name;
+  constructor(title = 'New list', id) {
+    this.title = title;
     const validUuid = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/gi;
     this.#id = validUuid.test(id) ? id : crypto.randomUUID();
     this.list = [];
@@ -9,7 +9,7 @@ class List {
   get info() {
     return {
       id: this.#id,
-      name: this.name,
+      title: this.title,
       length: this.list.length,
       tasks: this.list,
     };
