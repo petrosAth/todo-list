@@ -1,11 +1,21 @@
+import { storeObject } from './store.js';
 import { storeItem, loadAllItems } from './utilities.js';
 
 const createTask = (task, title, priority, dueDate, description) => {
-  const id = crypto.randomUUID();
+  // NOTE: Delete after development
+  const id = '';
+  // const id = crypto.randomUUID();
   const newTask = new task(id, title, priority, dueDate, description);
 
-  storeItem(id, {
-    [id]: task.name,
+  // storeItem(id, {
+  //   [id]: task.name,
+  //   title: title,
+  //   priority: priority,
+  //   dueDate: dueDate,
+  //   description: description,
+  // });
+
+  storeObject(newTask.info.id, {
     title: title,
     priority: priority,
     dueDate: dueDate,
@@ -16,6 +26,7 @@ const createTask = (task, title, priority, dueDate, description) => {
 };
 
 const loadAllTasks = (taskClasses) => {
+  // console.log(`taskClasses: ${taskClasses}`);
   loadAllItems(taskClasses, ['title', 'priority', 'dueDate', 'description']);
 };
 

@@ -32,6 +32,14 @@ const storeItem = (id, itemProps) => {
   }
 };
 
+const storeObject = (id, itemProps) => {
+  for (const prop in itemProps) {
+    if (Object.prototype.hasOwnProperty.call(itemProps, prop)) {
+      localStorage.setItem(id, JSON.stringify(itemProps));
+    }
+  }
+};
+
 const createRegExpsFromClassName = (classes) => {
   const regExps = [];
   for (const className in classes) {
@@ -54,6 +62,7 @@ const getItemClassName = (value, classNamesArray) => {
 };
 
 const findInStorage = (classes) => {
+  console.log(classes);
   const tasksToLoad = {};
   for (const key in localStorage) {
     if (Object.prototype.hasOwnProperty.call(localStorage, key)) {
@@ -67,6 +76,27 @@ const findInStorage = (classes) => {
   return tasksToLoad;
 };
 
+const findValidStoredObjects = (objectClasses) => {
+  const objectsToLoad = [];
+  for (const id in localStorage) {
+    if (Object.prototype.hasOwnProperty.call(localStorage, id)) {
+      const potentialObjectStringified = localStorage.getItem(id);
+      const potentialObject = JSON.parse(potentialObjectStringified);
+      // for (const objectClass in objectClasses) {
+      //   if (Object.prototype.hasOwnProperty.call(objectClasses, objectClass)) {
+      //     objectsToLoad.push({ id: id, object: potentialObject });
+      //   }
+      // }
+      objectClasses.forEach((objectClass) => {
+        if (objectClass.name === potentialObject.type) {
+          objectsToLoad.push({ id: id, object: potentialObject });
+        }
+      });
+    }
+  }
+  return objectsToLoad;
+};
+
 const loadItem = (itemsClasses, itemName, itemId, itemProps) => {
   const props = (key, propNames) => {
     const props = [];
@@ -77,12 +107,40 @@ const loadItem = (itemsClasses, itemName, itemId, itemProps) => {
   };
 
   // new taskClasses[taskName](taskId, ...props(taskId, taskProps));
-  const newTask = new itemsClasses[itemName](itemId, ...props(itemId, itemProps));
-  console.log(newTask);
+  const newItem = new itemsClasses[itemName](itemId, ...props(itemId, itemProps));
+  console.log(newItem);
+
+  // if (['Task', 'TaskExt'].includes(itemName)) {
+  //   // new taskClasses[taskName](taskId, ...props(taskId, taskProps));
+  //   // const newTask = new itemsClasses[itemName](itemId, ...props(itemId, itemProps));
+  //   // console.log(newTask);
+  //
+  //   // createTask(itemsClasses[itemName], ...props(itemId, itemProps));
+  //   // const newTask = createTask(itemsClasses[itemName], ...props(itemId, itemProps));
+  //   // console.log(newTask);
+  // }
+
+  // if (['List'].includes(itemName)) {
+  //   const newList = createList(itemsClasses[itemName], ...props(itemId, itemProps));
+  //   console.log(newList);
+  // }
+};
+
+const loadObject = (object, objectClasses) => {
+  // const newObject = new objectClasses[object.object.type](object.object.title, object.id);
+  // console.log(newObject);
+  // console.log(`object.object.type: ${object.object.type}`);
+  // console.log(`objectClasses: ${objectClasses.constructor.name}`);
+
+  // console.log(
+  //   `object.id: ${object.id} | object.object.type: ${object.object.type} | object.object.title: ${object.object.title} `
+  // );
+  return;
 };
 
 const loadAllItems = (itemClasses, itemProps) => {
   const itemIdsToLoad = findInStorage(itemClasses);
+  console.log(`itemIdsToLoad: ${itemIdsToLoad}`);
   for (const itemId in itemIdsToLoad) {
     if (Object.prototype.hasOwnProperty.call(itemIdsToLoad, itemId)) {
       loadItem(itemClasses, itemIdsToLoad[itemId], itemId, itemProps);
@@ -90,4 +148,18 @@ const loadAllItems = (itemClasses, itemProps) => {
   }
 };
 
-export { storeItem, loadAllItems };
+const loadAllObjects = (objectClasses) => {
+  const objectsToLoad = findValidStoredObjects(objectClasses);
+  // for (const objectId in objectIdsToLoad) {
+  //   if (Object.prototype.hasOwnProperty.call(objectIdsToLoad, objectId)) {
+  //     loadObject(objectId);
+  //   }
+  // }
+  objectsToLoad.forEach((object) => {
+    // console.log(object, objectClasses);
+    console.log(objectClasses);
+    loadObject(object, objectClasses);
+  });
+};
+
+export { dateFormat, findValidStoredObjects, storeItem, storeObject, loadAllItems, loadAllObjects };

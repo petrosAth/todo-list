@@ -1,39 +1,66 @@
-import { storeItem, loadAllItems } from './utilities.js';
+import { findValidStoredObjects, loadAllItems, loadAllObjects } from './utilities.js';
+import List from '../classes/taskList.js';
+import { storeList, storeObject } from './store.js';
 
-const masterList = () => {
-  const masterList = [];
+const listOfLists = () => {
+  const listOfLists = [];
+  const listIds = [];
 
-  const _getListIndex = (id) => {
-    return masterList.findIndex((list) => list.info.id === id);
+  const _getListIndex = (listId) => {
+    return listOfLists.findIndex((list) => list.info.id === listId);
   };
 
-  const _add = (listObject) => {
-    masterList.push(listObject);
+  const _getList = (listId) => {
+    return listOfLists[_getListIndex(listId)];
   };
 
-  const create = (listClass, title, id) => {
-    const newList = new listClass(title, id);
-    _add(newList);
-    storeItem(newList.info.id, {
-      [newList.info.id]: listClass.name,
-      title: newList.info.name,
+  const _storeListOfLists = () => {
+    storeList('listOfLists', listIds);
+  };
+
+  const _storeList = (listId, listTitle) => {
+    const listTasks = [];
+    _getList(listId).info.tasks.forEach((task) => {
+      listTasks.push({ [task.constructor.name]: task.info.id });
+    });
+    storeObject(listId, {
+      title: listTitle,
+      tasks: listTasks,
     });
   };
 
-  const rename = (id, title) => {
-    masterList[_getListIndex(id)].name = title;
+  const _add = (listObject) => {
+    listOfLists.push(listObject);
+    listIds.push(listObject.info.id);
+    _storeListOfLists();
+  };
+
+  const create = (listClass, listTitle, listId) => {
+    const newList = new listClass(listTitle, listId);
+    _add(newList);
+    _storeList(newList.info.id, newList.info.title);
+  };
+
+  const rename = (listId, listTitle) => {
+    _getList(listId).title = listTitle;
   };
 
   const addTask = (listId, task) => {
-    masterList[_getListIndex(listId)].addTask(task);
+    _getList(listId).addTask(task);
+    // console.log(
+    //   listOfLists[_getListIndex(listId)].info.id,
+    //   listOfLists[_getListIndex(listId)].constructor.name,
+    //   listOfLists[_getListIndex(listId)].info.title
+    // );
+    _storeList(_getList(listId).info.id, _getList(listId).info.title);
   };
 
   const removeTask = (listId, taskId) => {
-    masterList[_getListIndex(listId)].removeTask(taskId);
+    _getList(listId).removeTask(taskId);
   };
 
   return {
-    showAll: masterList,
+    showAll: listOfLists,
     create,
     rename,
     addTask,
@@ -41,8 +68,15 @@ const masterList = () => {
   };
 };
 
-const loadAllLists = (listClasses) => {
-  loadAllItems(listClasses, ['title']);
+const loadAllLists = () => {
+  const objectsToLoad = findValidStoredObjects([List]);
+  // console.log(objectsToLoad);
+  objectsToLoad.forEach((object) => {
+    const loadedList = new List(object.object.title, object.id);
+    // console.log(`object.object.title: ${object.object.title}`);
+    // console.log(`object.id: ${object.id}`);
+    // console.log(loadedList);
+  });
 };
 
-export { loadAllLists, masterList };
+export { listOfLists, loadAllLists };
