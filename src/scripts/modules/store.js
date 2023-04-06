@@ -1,5 +1,5 @@
 const storeList = (name, listProps) => {
-  localStorage.setItem(name, listProps);
+  localStorage.setItem(name, JSON.stringify(listProps));
 };
 
 const storeObject = (id, objectProps) => {

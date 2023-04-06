@@ -1,22 +1,20 @@
 import { findValidStoredObjects, loadAllItems, loadAllObjects } from './utilities.js';
-import List from '../classes/taskList.js';
 import { storeList, storeObject } from './store.js';
+import { parseObject, loadList, loadTask } from './load.js';
 
-const listOfLists = () => {
-  const listOfLists = [];
+const masterList = () => {
+  const masterList = [];
   const listIds = [];
 
+  const _clearMasterList = () => masterList.splice(0, masterList.length);
+
   const _getListIndex = (listId) => {
-    return listOfLists.findIndex((list) => list.info.id === listId);
+    return masterList.findIndex((list) => list.info.id === listId);
   };
 
-  const _getList = (listId) => {
-    return listOfLists[_getListIndex(listId)];
-  };
+  const _getList = (listId) => masterList[_getListIndex(listId)];
 
-  const _storeListOfLists = () => {
-    storeList('listOfLists', listIds);
-  };
+  const _storeListOfLists = () => storeList('masterList', listIds);
 
   const _storeList = (listId, listTitle) => {
     const listTasks = [];
@@ -30,7 +28,7 @@ const listOfLists = () => {
   };
 
   const _add = (listObject) => {
-    listOfLists.push(listObject);
+    masterList.push(listObject);
     listIds.push(listObject.info.id);
     _storeListOfLists();
   };
@@ -47,11 +45,6 @@ const listOfLists = () => {
 
   const addTask = (listId, task) => {
     _getList(listId).addTask(task);
-    // console.log(
-    //   listOfLists[_getListIndex(listId)].info.id,
-    //   listOfLists[_getListIndex(listId)].constructor.name,
-    //   listOfLists[_getListIndex(listId)].info.title
-    // );
     _storeList(_getList(listId).info.id, _getList(listId).info.title);
   };
 
@@ -59,24 +52,33 @@ const listOfLists = () => {
     _getList(listId).removeTask(taskId);
   };
 
+  const loadListsAndTasks = () => {
+    const loadMasterList = () => {
+      _clearMasterList();
+      console.log('---'.repeat(30)); // NOTE: Debugging
+      console.log(masterList); // NOTE: Debugging
+      const listsToLoad = parseObject('masterList');
+      if (listsToLoad) {
+        listsToLoad.forEach((listId) => {
+          loadList(create, listId);
+          loadTask(_getList(listId).info.tasks);
+        });
+      }
+      console.log('---'.repeat(30)); // NOTE: Debugging
+      console.log(masterList); // NOTE: Debugging
+    };
+
+    return loadMasterList;
+  };
+
   return {
-    showAll: listOfLists,
+    showAll: masterList,
     create,
     rename,
     addTask,
     removeTask,
+    loadListsAndTasks,
   };
 };
 
-const loadAllLists = () => {
-  const objectsToLoad = findValidStoredObjects([List]);
-  // console.log(objectsToLoad);
-  objectsToLoad.forEach((object) => {
-    const loadedList = new List(object.object.title, object.id);
-    // console.log(`object.object.title: ${object.object.title}`);
-    // console.log(`object.id: ${object.id}`);
-    // console.log(loadedList);
-  });
-};
-
-export { listOfLists, loadAllLists };
+export { masterList };
