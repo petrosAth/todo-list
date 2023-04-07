@@ -1,16 +1,19 @@
 import List from '../classes/taskList';
 
-const parseObject = (objectId) => JSON.parse(localStorage.getItem(objectId));
+const loadObject = (objectId) => JSON.parse(localStorage.getItem(objectId));
 
-const loadTask = (taskList) => {
-  taskList.forEach((task) => {
-    console.log(`Create loaded task: ${task}`);
-  });
+const loadTask = (task) => {
+  console.log('Create loaded task ' + '---'.repeat(15));
+  console.log(task);
 };
 
-const loadList = (createFn, listId) => {
-  const listToLoad = parseObject(listId);
-  createFn(List, listToLoad.title, listId);
+const createLoadedTaskList = (createFn, listId) => {
+  const loadedList = loadObject(listId);
+  // console.log('listToLoad.tasks' + '---'.repeat(15));
+  // console.log(listToLoad.tasks);
+  // createLoadedTask(loadedList.list);
+  loadedList.list.forEach((task) => loadTask(task));
+  return createFn(List, loadedList.title, listId);
 };
 
-export { parseObject, loadList, loadTask };
+export { loadObject, createLoadedTaskList };

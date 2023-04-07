@@ -81,6 +81,8 @@ const findValidStoredObjects = (objectClasses) => {
   for (const id in localStorage) {
     if (Object.prototype.hasOwnProperty.call(localStorage, id)) {
       const potentialObjectStringified = localStorage.getItem(id);
+      console.log('potentialObjectStringified');
+      console.log(potentialObjectStringified);
       const potentialObject = JSON.parse(potentialObjectStringified);
       // for (const objectClass in objectClasses) {
       //   if (Object.prototype.hasOwnProperty.call(objectClasses, objectClass)) {
@@ -115,8 +117,8 @@ const loadItem = (itemsClasses, itemName, itemId, itemProps) => {
   //   // const newTask = new itemsClasses[itemName](itemId, ...props(itemId, itemProps));
   //   // console.log(newTask);
   //
-  //   // createTask(itemsClasses[itemName], ...props(itemId, itemProps));
-  //   // const newTask = createTask(itemsClasses[itemName], ...props(itemId, itemProps));
+  //   // createTask('', itemsClasses[itemName], ...props(itemId, itemProps));
+  //   // const newTask = createTask('', itemsClasses[itemName], ...props(itemId, itemProps));
   //   // console.log(newTask);
   // }
 

@@ -1,10 +1,7 @@
-import { storeObject } from './store.js';
+// import { storeTask } from './store.js';
 import { storeItem, loadAllItems } from './utilities.js';
 
-const createTask = (task, title, priority, dueDate, description) => {
-  // NOTE: Delete after development
-  const id = '';
-  // const id = crypto.randomUUID();
+const createTask = (id, task, title, priority, dueDate, description) => {
   const newTask = new task(id, title, priority, dueDate, description);
 
   // storeItem(id, {
@@ -15,12 +12,12 @@ const createTask = (task, title, priority, dueDate, description) => {
   //   description: description,
   // });
 
-  storeObject(newTask.info.id, {
-    title: title,
-    priority: priority,
-    dueDate: dueDate,
-    description: description,
-  });
+  // storeTask(newTask.info.id, {
+  //   title: title,
+  //   priority: priority,
+  //   dueDate: dueDate,
+  //   description: description,
+  // });
 
   return newTask;
 };

@@ -1,6 +1,6 @@
 import { findValidStoredObjects, loadAllItems, loadAllObjects } from './utilities.js';
-import { storeList, storeObject } from './store.js';
-import { parseObject, loadList, loadTask } from './load.js';
+import { storeObject, storeTaskList } from './store.js';
+import { loadObject, createLoadedTaskList } from './load.js';
 
 const masterList = () => {
   const masterList = [];
@@ -14,29 +14,22 @@ const masterList = () => {
 
   const _getList = (listId) => masterList[_getListIndex(listId)];
 
-  const _storeListOfLists = () => storeList('masterList', listIds);
-
-  const _storeList = (listId, listTitle) => {
-    const listTasks = [];
-    _getList(listId).info.tasks.forEach((task) => {
-      listTasks.push({ [task.constructor.name]: task.info.id });
-    });
-    storeObject(listId, {
-      title: listTitle,
-      tasks: listTasks,
-    });
+  const createTask = (id, task, title, priority, dueDate, description) => {
+    return new task(id, title, priority, dueDate, description);
   };
 
   const _add = (listObject) => {
     masterList.push(listObject);
     listIds.push(listObject.info.id);
-    _storeListOfLists();
+    storeObject('masterList', listIds);
   };
 
-  const create = (listClass, listTitle, listId) => {
+  const createTaskList = (listClass, listTitle, listId) => {
     const newList = new listClass(listTitle, listId);
     _add(newList);
-    _storeList(newList.info.id, newList.info.title);
+    // taskList().store(newList);
+    storeTaskList(newList);
+    return newList;
   };
 
   const rename = (listId, listTitle) => {
@@ -45,7 +38,7 @@ const masterList = () => {
 
   const addTask = (listId, task) => {
     _getList(listId).addTask(task);
-    _storeList(_getList(listId).info.id, _getList(listId).info.title);
+    storeTaskList(_getList(listId));
   };
 
   const removeTask = (listId, taskId) => {
@@ -57,12 +50,9 @@ const masterList = () => {
       _clearMasterList();
       console.log('---'.repeat(30)); // NOTE: Debugging
       console.log(masterList); // NOTE: Debugging
-      const listsToLoad = parseObject('masterList');
+      const listsToLoad = loadObject('masterList');
       if (listsToLoad) {
-        listsToLoad.forEach((listId) => {
-          loadList(create, listId);
-          loadTask(_getList(listId).info.tasks);
-        });
+        listsToLoad.forEach((listId) => createLoadedTaskList(createTaskList, listId));
       }
       console.log('---'.repeat(30)); // NOTE: Debugging
       console.log(masterList); // NOTE: Debugging
@@ -73,11 +63,12 @@ const masterList = () => {
 
   return {
     showAll: masterList,
-    create,
+    createTask,
+    createTaskList,
     rename,
     addTask,
     removeTask,
-    loadListsAndTasks,
+    loadAll: loadListsAndTasks,
   };
 };
 
