@@ -1,19 +1,31 @@
-import List from '../classes/taskList';
-
 const loadObject = (objectId) => JSON.parse(localStorage.getItem(objectId));
 
-const loadTask = (task) => {
-  console.log('Create loaded task ' + '---'.repeat(15));
-  console.log(task);
+const loadTask = (task, createTaskFn, taskClasses) => {
+  const loadedTask = () => {
+    const taskProps = [];
+    Object.values(loadObject(task[1])).forEach((value) => {
+      taskProps.push(value);
+    });
+    return taskProps;
+  };
+  return createTaskFn(taskClasses[task[0]], task[1], ...loadedTask());
 };
 
-const createLoadedTaskList = (createFn, listId) => {
-  const loadedList = loadObject(listId);
-  // console.log('listToLoad.tasks' + '---'.repeat(15));
-  // console.log(listToLoad.tasks);
-  // createLoadedTask(loadedList.list);
-  loadedList.list.forEach((task) => loadTask(task));
-  return createFn(List, loadedList.title, listId);
+const loadTaskList = (taskListId, createTaskListFn, taskListClass, createTaskFn, taskClasses) => {
+  const loadedTaskList = loadObject(taskListId);
+  const createdLoadedTaskList = createTaskListFn(taskListClass, loadedTaskList.title, taskListId);
+  loadedTaskList.tasks.forEach((loadedTask) => {
+    createdLoadedTaskList.addTask(loadTask(loadedTask, createTaskFn, taskClasses));
+  });
 };
 
-export { loadObject, createLoadedTaskList };
+const loadMasterList = (masterListName, createTaskListFn, taskListClass, createTaskFn, taskClasses) => {
+  const masterList = loadObject(masterListName);
+  if (masterList) {
+    masterList.forEach((taskListId) => {
+      loadTaskList(taskListId, createTaskListFn, taskListClass, createTaskFn, taskClasses);
+    });
+  }
+};
+
+export default loadMasterList;
