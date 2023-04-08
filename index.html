@@ -8,5 +8,107 @@
   <body>
     <div id="app"></div>
     <script type="module" src="/src/scripts/main.js"></script>
+    <header class="header">
+      <button class="menu-toggle icon__menu button">=</button>
+      <div class="page-title">
+        <span class="page-title__icon icon__todo">i</span>
+        <h1 class="page-title__title">ToDo</h1>
+      </div>
+    </header>
+    <nav class="nav">
+      <div class="list">
+        <ul class="list__body">
+          <li class="list__item__today list__item">
+            <button class="list__item__label list__item__today button">
+              <span class="list__item__icon icon__today">i</span><span class="list__item__text">Today</span>
+            </button>
+            <span class="list__item__indicator list__item__count">3</span>
+          </li>
+          <li class="list__item__Upcoming list__item">
+            <button class="list__item__label list__item__upcoming button">
+              <span class="list__item__icon icon__upcoming">i</span><span class="list__item__text">Upcoming</span>
+            </button>
+            <span class="list__item__indicator list__item__count">14</span>
+          </li>
+          <li class="list__item__today list__item">
+            <button class="list__item__label list__item__important button">
+              <span class="list__item__icon icon__important">i</span><span class="list__item__text">Important</span>
+            </button>
+            <span class="list__item__indicator list__item__count">2</span>
+          </li>
+        </ul>
+      </div>
+      <div class="list">
+        <h2 class="list__title">Lists</h2>
+        <ul class="list__body">
+          <li class="list__item__list list__item">
+            <button class="list__item__title button">List 1</button>
+            <span class="list__item__indicators">
+              <span class="list__item__count">3</span>
+              <button class="list__item__edit button icon__edit">#</button>
+              <button class="list__item__delete button icon__delete">#</button>
+            </span>
+          </li>
+          <li class="list__item__list list__item">
+            <button class="list__item__title button">List 2</button>
+            <span class="list__item__indicators">
+              <span class="list__item__count">9</span>
+              <button class="list__item__edit button icon__edit">#</button>
+              <button class="list__item__delete button icon__delete">#</button>
+            </span>
+          </li>
+          <li class="list__item__list list__item">
+            <button class="list__item__title button">List 3</button>
+            <span class="list__item__indicators">
+              <span class="list__item__count">5</span>
+              <button class="list__item__edit button icon__edit">#</button>
+              <button class="list__item__delete button icon__delete">#</button>
+            </span>
+          </li>
+        </ul>
+        <button class="list__add button">+</button>
+      </div>
+      <main class="main">
+        <div class="tasks">
+          <div class="tasks__item">
+            <button class="item__status button"><span class="status__icon icon__status">O</span></button>
+            <span class="item__details">
+              <h3 class="item__title">Task 1 Title</h3>
+              <span class="item__dueDate">
+                <span class="dueDate__date__icon icon__date">D</span>
+                <span class="dueDate__date__text">Jul 2</span>
+                <span class="dueDate__time__icon icon__time">T</span>
+                <span class="dueDate__time__text">10:00</span>
+              </span>
+            </span>
+            <button class="item__description button">
+              <span class="description__text">Details</span>
+              <span class="description__icon icon__description icon__description">V</span>
+            </button>
+            <button class="item__edit icon__edit button">$</button>
+            <button class="item__delete icon__delete button">X</button>
+          </div>
+          <div class="tasks__item">
+            <span class="item__status button"><span class="status__icon icon__status">O</span></span>
+            <span class="item__details">
+              <h3 class="item__title">Task 2 Title</h3>
+              <span class="item__dueDate">
+                <span class="dueDate__date__icon icon__date">#</span>
+                <span class="dueDate__date__text">Jul 2</span>
+                <span class="dueDate__time__icon icon__time">#</span>
+                <span class="dueDate__time__text">10:00</span>
+              </span>
+            </span>
+            <button class="item__description button">
+              <span class="description__text">Details</span>
+              <span class="description__icon icon__description icon__description">#</span>
+            </button>
+            <button class="item__edit icon__edit button">#</button>
+            <button class="item__delete icon__delete button">#</button>
+          </div>
+        </div>
+        <button class="tasks__add button">+</button>
+      </main>
+    </nav>
   </body>
 </html>
