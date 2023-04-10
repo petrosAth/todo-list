@@ -1,8 +1,8 @@
 import { appendChildren } from '../modules/nodeUtils/element';
-import header from './header';
-import nav from './nav';
-import main from './main';
-import footer from './footer';
+import header from '../layout/header';
+import nav from '../layout/nav';
+import main from '../layout/main';
+import footer from '../layout/footer';
 
 const app = () => {
   const app = document.querySelector('#app');
