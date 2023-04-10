@@ -1,0 +1,17 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the navigation section of the site/application.
+// -----------------------------------------------------------------------------
+
+/// Load custom modules
+@use '../abstracts' as a;
+
+.nav {
+  .list {
+    padding-inline: 0;
+    padding-block: 1rem 0;
+
+    .list__title {
+      @include a.text-setting(500);
+    }
+  }
+}

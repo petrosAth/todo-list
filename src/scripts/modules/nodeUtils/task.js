@@ -1,7 +1,7 @@
 import { createNewElement, appendChildren } from './element';
 
 const create = (title, dueDate) => {
-  const tasks = document.querySelector('.tasks'); // DEBUG: change id to classes
+  const tasks = document.querySelector('.tasks');
   const tasksItem = createNewElement('div', { classes: 'tasks__item' });
 
   // Task status

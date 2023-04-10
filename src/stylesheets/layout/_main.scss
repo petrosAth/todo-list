@@ -1,0 +1,36 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the main section of the site/application.
+// -----------------------------------------------------------------------------
+
+/// Load custom modules
+@use '../abstracts' as a;
+
+.main {
+  display: flex;
+  flex-direction: column;
+
+  .tasks__item {
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 6fr 2fr repeat(2, 1fr);
+    justify-content: space-between;
+    align-items: center;
+
+    .item {
+      &__status {
+        padding-right: 1rem;
+      }
+      &__details {
+        padding-right: 1rem;
+      }
+      &__description {
+        padding-right: 1rem;
+      }
+      &__edit {
+        padding-right: 1rem;
+      }
+      &__delete {
+      }
+    }
+  }
+}

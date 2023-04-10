@@ -1,3 +1,20 @@
 // -----------------------------------------------------------------------------
 // This file contains all styles related to the header of the site/application.
 // -----------------------------------------------------------------------------
+
+/// Load custom modules
+@use '../abstracts' as a;
+
+.header {
+  display: flex;
+  align-items: center;
+
+  // .menu-toggle {}
+
+  .page-title {
+    flex-basis: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
