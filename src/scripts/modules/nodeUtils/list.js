@@ -9,11 +9,7 @@ const create = (name, title, type) => {
     classes: ['list__item__label', 'button'],
     data: ['select', `${name}`],
   });
-  const listItemLabelIcon = createNewElement(
-    'span',
-    { classes: ['list__item__icon', `icon__${type || name}`] },
-    { text: 'i' } // TODO: add icon
-  );
+  const listItemLabelIcon = createNewElement('span', { classes: ['list__item__icon', `icon__${type || name}`] });
   const listItemLabelText = createNewElement(
     'span',
     { classes: 'list__item__text', id: 'label' },
@@ -22,18 +18,10 @@ const create = (name, title, type) => {
   const listItemIndicators = createNewElement('span', { classes: 'list__item__indicators' });
   const listItemCount = createNewElement('span', { classes: ['list__item__count'], id: 'count' });
   const listItemEdit = type
-    ? createNewElement(
-        'button',
-        { classes: ['list__item__edit', 'button', 'icon__edit'], id: 'edit' },
-        { text: '#' } // TODO: add icon
-      )
+    ? createNewElement('button', { classes: ['list__item__edit', 'button', 'icon__edit'], id: 'edit' })
     : null;
   const listItemDelete = type
-    ? createNewElement(
-        'button',
-        { classes: ['list__item__delete', 'button', 'icon__delete'], id: 'delete' },
-        { text: '#' } // TODO: add icon
-      )
+    ? createNewElement('button', { classes: ['list__item__delete', 'button', 'icon__delete'], id: 'delete' })
     : null;
 
   appendChildren([

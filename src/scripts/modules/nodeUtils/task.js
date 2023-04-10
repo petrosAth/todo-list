@@ -6,31 +6,27 @@ const create = (title, dueDate) => {
 
   // Task status
   const itemStatusButton = createNewElement('button', { classes: ['item__status', 'button'] });
-  const itemStatusIcon = createNewElement('span', { classes: ['status__icon', 'icon__status'] }, { text: 'O' }); // TODO: replace text with icon
+  const itemStatusIcon = createNewElement('span', { classes: ['status__icon', 'icon__status'] });
 
   // Task details
   const itemDetails = createNewElement('div', { classes: 'item__details' });
   const itemTitle = createNewElement('h3', { classes: 'item__title' }, { text: `${title}` });
   const itemDueDate = createNewElement('span', { classes: 'item__dueDate' });
-  const dueDateDateIcon = createNewElement('span', { classes: ['dueDate__date__icon', 'icon__date'] }, { text: 'D' });
+  const dueDateDateIcon = createNewElement('span', { classes: ['dueDate__date__icon', 'icon__date'] });
   const dueDateDateText = createNewElement('span', { classes: 'dueDate__date__text' }, { text: `${dueDate.date}` });
-  const dueDateTimeIcon = createNewElement('span', { classes: ['dueDate__time__icon', 'icon__time'] }, { text: 'T' });
+  const dueDateTimeIcon = createNewElement('span', { classes: ['dueDate__time__icon', 'icon__time'] });
   const dueDateTimeText = createNewElement('span', { classes: 'dueDate__time__text' }, { text: `${dueDate.time}` });
 
   // Task description
   const itemDescription = createNewElement('div', { classes: ['item__description', 'button'] });
   const descriptionText = createNewElement('span', { classes: 'description__text' }, { text: 'Details' });
-  const descriptionIcon = createNewElement(
-    'span',
-    { classes: ['description__icon', 'icon__description'] },
-    { text: 'V' }
-  ); // TODO: add actual description text
+  const descriptionIcon = createNewElement('span', { classes: ['description__icon', 'icon__description'] });
 
   // Task edit button
-  const itemEdit = createNewElement('button', { classes: ['item__edit', 'icon__edit', 'button'] }, { text: '$' }); // TODO: replace text with icon
+  const itemEdit = createNewElement('button', { classes: ['item__edit', 'icon__edit', 'button'] });
 
   // Task delete button
-  const itemDelete = createNewElement('button', { classes: ['item__delete', 'icon__delete', 'button'] }, { text: '#' }); // TODO: replace text with icon
+  const itemDelete = createNewElement('button', { classes: ['item__delete', 'icon__delete', 'button'] });
 
   appendChildren([
     [itemStatusButton, itemStatusIcon],

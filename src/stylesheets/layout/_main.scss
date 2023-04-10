@@ -6,31 +6,129 @@
 @use '../abstracts' as a;
 
 .main {
+  padding: 1rem;
   display: flex;
   flex-direction: column;
 
-  .tasks__item {
-    padding: 1rem;
-    display: grid;
-    grid-template-columns: 1fr 6fr 2fr repeat(2, 1fr);
-    justify-content: space-between;
-    align-items: center;
+  .tasks {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 
-    .item {
-      &__status {
-        padding-right: 1rem;
+    .tasks__item {
+      display: grid;
+      grid-template-columns: 1fr 6fr 2fr repeat(2, 1fr);
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+
+      .item {
+        &__status {
+          &.button {
+            width: 1rem;
+            height: 1rem;
+          }
+          .status__icon {
+            &.icon__status {
+              display: inline-block;
+              min-width: 1rem;
+              min-height: 1rem;
+              background-image: a.image('task-status-undone.svg');
+              background-position: center;
+              background-repeat: no-repeat;
+            }
+          }
+        }
+        &__details {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          gap: 0.3125rem;
+
+          // .item__title {}
+          .item__dueDate {
+            display: flex;
+            align-items: center;
+            gap: 0.3125rem;
+
+            .dueDate__ {
+              &date__ {
+                &icon {
+                  &.icon__date {
+                    display: inline-block;
+                    min-width: 1rem;
+                    min-height: 1rem;
+                    background-image: a.image('task-dueDate-date.svg');
+                    background-position: center;
+                    background-repeat: no-repeat;
+                  }
+                }
+                &text {
+                  padding-right: 0.625rem;
+                }
+              }
+              &time__ {
+                &icon {
+                  &.icon__time {
+                    display: inline-block;
+                    min-width: 1rem;
+                    min-height: 1rem;
+                    background-image: a.image('task-dueDate-time.svg');
+                    background-position: center;
+                    background-repeat: no-repeat;
+                  }
+                }
+                // &text {}
+              }
+            }
+          }
+        }
+        &__description {
+          display: flex;
+          align-items: center;
+          gap: 0.3125rem;
+
+          // .description__text {}
+          .description__icon {
+            &.icon__description {
+              display: inline-block;
+              min-width: 1rem;
+              min-height: 1rem;
+              background-image: a.image('task-description-show.svg');
+              background-position: center;
+              background-repeat: no-repeat;
+            }
+          }
+        }
+        &__edit {
+          &.icon__edit {
+            min-width: 1rem;
+            min-height: 1rem;
+            background-image: a.image('task-edit.svg');
+            background-position: center;
+            background-repeat: no-repeat;
+          }
+        }
+        &__delete {
+          &.icon__delete {
+            min-width: 1rem;
+            min-height: 1rem;
+            background-image: a.image('task-delete.svg');
+            background-position: center;
+            background-repeat: no-repeat;
+          }
+        }
       }
-      &__details {
-        padding-right: 1rem;
-      }
-      &__description {
-        padding-right: 1rem;
-      }
-      &__edit {
-        padding-right: 1rem;
-      }
-      &__delete {
-      }
+    }
+  }
+  .tasks__add {
+    &.button {
+      margin: 1rem;
+      min-width: 2rem;
+      min-height: 2rem;
+      background-image: a.image('add.svg');
+      background-position: center;
+      background-repeat: no-repeat;
     }
   }
 }

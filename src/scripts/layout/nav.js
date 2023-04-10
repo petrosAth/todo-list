@@ -19,7 +19,7 @@ const nav = () => {
   const listsUser = createNewElement('div', { classes: 'list' });
   const listsUserTitle = createNewElement('h2', { classes: 'list__title' }, { text: 'Lists' });
   const listsUserBody = createNewElement('ul', { classes: 'list__body', id: 'lists' });
-  const listsUserAddList = createNewElement('button', { classes: ['list__add', 'button'] }, { text: '+' });
+  const listsUserAddList = createNewElement('button', { classes: ['list__add', 'button'] });
 
   appendChildren([
     [listsBuiltinBody, [listItemToday, listItemUpcoming, listItemImportant]],

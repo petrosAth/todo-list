@@ -6,12 +6,82 @@
 @use '../abstracts' as a;
 
 .nav {
+  padding: 1rem;
+
   .list {
     padding-inline: 0;
     padding-block: 1rem 0;
 
     .list__title {
-      @include a.text-setting(500);
+    }
+
+    .list__body {
+      .list__item {
+        display: flex;
+        align-items: center;
+        gap: 0.625rem;
+
+        &__label {
+          display: flex;
+          align-items: center;
+          gap: 0.625rem;
+
+          // .list__item__text { }
+
+          .list__item__icon {
+            display: inline-block;
+
+            &.icon__ {
+              &today {
+                min-width: 1rem;
+                min-height: 1rem;
+                background-image: a.image('list-today.svg');
+                background-position: center;
+                background-repeat: no-repeat;
+              }
+              &upcoming {
+                min-width: 1rem;
+                min-height: 1rem;
+                background-image: a.image('list-upcoming.svg');
+                background-position: center;
+                background-repeat: no-repeat;
+              }
+              &important {
+                min-width: 1rem;
+                min-height: 1rem;
+                background-image: a.image('list-important.svg');
+                background-position: center;
+                background-repeat: no-repeat;
+              }
+              &list {
+                min-width: 1rem;
+                min-height: 1rem;
+                background-image: a.image('list-list.svg');
+                background-position: center;
+                background-repeat: no-repeat;
+              }
+            }
+          }
+        }
+        &__indicators {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 0.125rem solid red;
+          border-radius: 50%;
+          width: 2rem;
+          height: 2rem;
+        }
+      }
+    }
+
+    .list__add {
+      margin: 1rem;
+      min-width: 2rem;
+      min-height: 2rem;
+      background-image: a.image('add.svg');
+      background-position: center;
+      background-repeat: no-repeat;
     }
   }
 }
